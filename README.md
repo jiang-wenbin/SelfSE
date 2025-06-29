@@ -1,2 +1,2 @@
-## SelfSE: Iterative Self-learning for Speech Enhancement Without Clean Speech
+## SelfSE: Iterative Self-Learning for Speech Enhancement Without Clean Speech
 Online Supplement
