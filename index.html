@@ -1,0 +1,120 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>SelfSE: Self-Learning Speech Enhancement via Noisy Speech Refinement</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/user.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>SelfSE: Self-Learning Speech Enhancement via Noisy Speech Refinement <small class="color_fade">Online Supplement</small>
+            </h1>
+        </header>
+
+        <h4> Authors </h4>
+        <div style="font-size: medium;"> Wenbin Jiang, Fei Wen, Kai Yu </div>
+        <h4> Abstract </h4>
+        <div style="font-size: medium;"> 
+            The majority of deep learning-based speech enhan\-cement techniques rely on supervised training, which requires extensive pairs of noisy and clean speech. However, due to the complexity and variability of real-world environments, obtaining ground-truth clean speech can be challenging or even impractical in certain situations. To tackle this issue, we introduce a novel self-supervised speech enhancement method that eliminates the need for clean reference speech. Our method involves two training stages to develop a speech enhancement model through iterative refinement. In the first stage, we use unprocessed noisy speech and noise to create noisier-to-noisy data pairs, which are used to train the initial model. In the second stage, we iteratively generate noisier-to-noisy data pairs using speech sampled from the estimated speech and unprocessed noisy speech, along with noise sampled from the noise corpus, to train a more effective model. Additionally, we provide a theoretical analysis to compare and deepen the understanding of various self-supervised learning methods, including Noisier2Noisy, IDR-SE, and our proposed SelfSE method. We conduct experiments on three popular benchmark datasets, and the results demonstrate that our approach achieves performance comparable to supervised learning methods on simulated data and surpasses them on real-world data in both speech enhancement and recognition tasks.
+        </div>
+    </br>
+        <h4> Datasets </h4>
+        <div style="font-size: medium;">
+            <li>The <a href="https://datashare.ed.ac.uk/handle/10283/2791"> VoiceBank+DEMAND </a> dataset is used for demo. </li>
+            <li> Audio samples of the test set we processed are available at the repository (<a href="https://github.com/jiang-wenbin/SelfSE/tree/main/voicebank/SelfSE">voicebank</a>).</li>
+        </div>
+    </br>
+        <h4> Compared methods </h4>
+        <div style="font-size: medium;">
+            <li>OMLSA: <a href="https://israelcohen.com/software">Noise Spectrum Estimation in Adverse Environments: Improved Minima Controlled Recursive Averaging</a></li>
+            <li><a href=" https://github.com/huyanxin/DeepComplexCRN">DCCRN: Deep Complex Convolution Recurrent Network for Phase-Aware Speech Enhancement</a></li>
+            <li>Noise2Noise: <a href="https://github.com/madhavmk/Noise2Noise-audio_denoising_without_clean_training_data">Speech Denoising without Clean Training Data: a Noise2Noise Approach</a></li>
+            <li>Noiser2Noisy: <a href="https://ieeexplore.ieee.org/abstract/document/9616166/">Noisy-target Training: A Training Strategy for DNN-based Speech Enhancement without Clean Speech</a></li>
+            <li>IDR-SE: <a href="https://link.springer.com/chapter/10.1007/978-981-97-0601-3_22">Iterative Noisy-Target Approach: Speech Enhancement Without Clean Speech</a></li>            
+        </div>
+    </br>
+        <h4> Audio Samples </h4>
+        <!-- <hr class="hr_line"> -->
+        <!-- <h3>VoiceBank+DEMAND</h3> -->
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th>Model\id(noise)</th>
+                    <th>p257_008(cafe)</th>
+                    <th>p257_033(living)</th>
+                    <th>p257_106(bus)</th>
+                    <th>p232_250(office)</th>
+                    <th>p232_409(psquare)</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr> <td> Clean </td>
+                <td><audio controls=""><source src="samples/Clean/p257_008.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Clean/p257_033.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Clean/p257_106.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Clean/p232_250.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Clean/p232_409.wav"></audio></td>
+                </tr>
+                <tr> <td> Noisy </td>
+                <td><audio controls=""><source src="samples/Noisy/p257_008.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noisy/p257_033.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noisy/p257_106.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noisy/p232_250.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noisy/p232_409.wav"></audio></td>
+                </tr>
+                <tr> <td> OMLSA </td>
+                <td><audio controls=""><source src="samples/OMLSA/p257_008.wav"></audio></td>
+                <td><audio controls=""><source src="samples/OMLSA/p257_033.wav"></audio></td>
+                <td><audio controls=""><source src="samples/OMLSA/p257_106.wav"></audio></td>
+                <td><audio controls=""><source src="samples/OMLSA/p232_250.wav"></audio></td>
+                <td><audio controls=""><source src="samples/OMLSA/p232_409.wav"></audio></td>
+                </tr>
+                <tr> <td> DCCRN </td>
+                <td><audio controls=""><source src="samples/DCCRN/p257_008.wav"></audio></td>
+                <td><audio controls=""><source src="samples/DCCRN/p257_033.wav"></audio></td>
+                <td><audio controls=""><source src="samples/DCCRN/p257_106.wav"></audio></td>
+                <td><audio controls=""><source src="samples/DCCRN/p232_250.wav"></audio></td>
+                <td><audio controls=""><source src="samples/DCCRN/p232_409.wav"></audio></td>
+                </tr>
+                <tr> <td> Noise2Noise </td>
+                <td><audio controls=""><source src="samples/Noise2Noise/p257_008.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noise2Noise/p257_033.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noise2Noise/p257_106.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noise2Noise/p232_250.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noise2Noise/p232_409.wav"></audio></td>
+                </tr>
+                <tr> <td> Noiser2Noisy </td>
+                <td><audio controls=""><source src="samples/Noiser2Noisy/p257_008.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noiser2Noisy/p257_033.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noiser2Noisy/p257_106.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noiser2Noisy/p232_250.wav"></audio></td>
+                <td><audio controls=""><source src="samples/Noiser2Noisy/p232_409.wav"></audio></td>
+                </tr>
+                <tr> <td> IDR-SE </td>
+                <td><audio controls=""><source src="samples/IDR-SE/p257_008.wav"></audio></td>
+                <td><audio controls=""><source src="samples/IDR-SE/p257_033.wav"></audio></td>
+                <td><audio controls=""><source src="samples/IDR-SE/p257_106.wav"></audio></td>
+                <td><audio controls=""><source src="samples/IDR-SE/p232_250.wav"></audio></td>
+                <td><audio controls=""><source src="samples/IDR-SE/p232_409.wav"></audio></td>
+                </tr>
+                <tr> <td> SelfSE </td>
+                <td><audio controls=""><source src="samples/SelfSE/p257_008.wav"></audio></td>
+                <td><audio controls=""><source src="samples/SelfSE/p257_033.wav"></audio></td>
+                <td><audio controls=""><source src="samples/SelfSE/p257_106.wav"></audio></td>
+                <td><audio controls=""><source src="samples/SelfSE/p232_250.wav"></audio></td>
+                <td><audio controls=""><source src="samples/SelfSE/p232_409.wav"></audio></td>
+                </tr>              
+            </tbody>
+        </table>
+        <!-- <div style="font-size: medium;" class="color_fade"> Note: the audio samples of the original NyTT paper are not publicly available.</div> -->
+        <h4>Spectrogram of the samples in third column</h4>
+        <img src="img/p257_106.png" class="container">
+    </br>    
+        <div class="row"> &nbsp; </div> <br/>
+
+    </div>
+</body>
