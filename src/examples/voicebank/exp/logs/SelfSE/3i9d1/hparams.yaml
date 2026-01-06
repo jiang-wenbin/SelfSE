@@ -1,0 +1,120 @@
+name: voicebank
+version: 3i9d1
+system:
+  name: N2N_UniSE
+  exp_name: SelfSE
+  debug: false
+  seed: 0
+  log_dir: exp/logs
+  train_and_test: true
+  iter_p: 0.9
+  rms_norm: true
+model:
+  rnn:
+    bidirectional: true
+  name: UNet
+  param: UNet_6_128
+  mask: true
+  debug: false
+data:
+  name: WavDataset
+  pairs: noisier2noisy
+  data_dir: data
+  sample_rate: 16000
+  chunk_size: 157
+  train:
+    name: OnlineNoisyDataset
+    noisy_store: noisy.flac.hdf5
+    noisy_csv: train/train.csv
+    clean_store: clean.flac.hdf5
+    clean_csv: train/train.csv
+    split_wav: true
+  valid:
+    name: WavDataset
+    noisy_store: noisy.flac.hdf5
+    noisy_csv: valid/valid.csv
+    clean_store: clean.flac.hdf5
+    clean_csv: valid/valid.csv
+    split_wav: false
+  test:
+    name: WavDataset
+    noisy_store: noisy.flac.hdf5
+    noisy_csv: test/test.csv
+    clean_store: clean.flac.hdf5
+    clean_csv: test/test.csv
+    split_wav: false
+  noise_store: noise/noise.wav.hdf5
+  noise_csv: noise/noise.csv
+  rir_store: rir/rir.wav.hdf5
+  rir_csv: rir/rir.csv
+  add_rir: -1
+  mix_param:
+    sr: 16000
+    snr_lower: -5
+    snr_upper: 20
+    randomize_snr: true
+    target_level_lower: -35
+    target_level_upper: -15
+    fs: 16000
+    audio_length: 30
+    silence_length: 0.2
+    clean_activity_threshold: 0.6
+    noise_activity_threshold: 0.0
+    is_test_set: false
+    lower_t60: 0.3
+    upper_t60: 1.3
+  dataloader:
+    batch_size: 58
+    shuffle: true
+    num_workers: 8
+    pin_memory: false
+    prefetch_factor: 4
+    collate_fn: AudioCollateFn
+  valid_batch_size: 1
+  data_augment:
+    remix: false
+    bandmask:
+      maxwidth: 0.2
+    shift: false
+    revecho: false
+loss:
+  name: SI_STFT_SNRLoss
+pesq_loss:
+  name: PESQLoss
+  weight: 10
+trainer:
+  max_epochs: 300
+  gradient_clip_val: 5.0
+  log_every_n_steps: 100
+  strategy: ddp_find_unused_parameters_true
+trainer_callbacks:
+  model_checkpoint:
+    monitor: valid_loss
+    mode: min
+    save_top_k: 3
+    save_last: true
+  early_stop:
+    monitor: valid_loss
+    mode: min
+    patience: 15
+    verbose: true
+  progress_logger: true
+optimizer:
+  name: AdamW
+  lr: 0.001
+  lr_scheduler:
+    name: ReduceLROnPlateau
+    factor: 0.1
+    patience: 7
+stft:
+  name: torch
+  n_fft: 512
+  win_length: 400
+  hop_length: 100
+pool:
+  name: ThreadPoolExecutor
+  max_workers: null
+conf: conf/config.yaml
+cmd: train
+root_dir: exp/logs/SelfSE/3i9d1
+ckpt: null
