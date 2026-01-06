@@ -1,2 +1,2 @@
-## SelfSE: Self-Learning Speech Enhancement via Noisy Speech Refinement
+## SelfSE: Self-Supervised Speech Enhancement via Noisy Speech Refinement
 Online Supplement
